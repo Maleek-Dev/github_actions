@@ -1,0 +1,12 @@
+# yml file is a configuration file
+name: Staging deployment 
+on: 
+  workflow_dispatch
+  push:
+    branches: main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  steps:
+   - name: Display Message 
+     run: echo All is well that ends well

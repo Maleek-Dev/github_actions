@@ -12,7 +12,7 @@ jobs:
   steps:
    - name: Display Message 
      id: generate_data
-     run: echo "my_value=Hello_from_test" >> $GITHUB_OUTPUT
+     run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
   build:
     needs: test
     runs-on: ubuntu-latest

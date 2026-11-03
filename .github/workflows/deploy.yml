@@ -19,7 +19,7 @@ jobs:
       - name: Display Message
         env:
          APP: ${{ var.APP_test }}
-         MONGO_URL: ${{ secrets.MONGO_TEST-URL }}
+         MONGO_URL: ${{ secrets.MONGO_TEST_URL }}
         id: generate_data
         run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
 

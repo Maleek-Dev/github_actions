@@ -5,14 +5,20 @@ on:
   push:
     branches:
       - main
+  env:
+    APP: v1
 
 jobs:
   test:
+    env:
+      APP: v2
     runs-on: ubuntu-latest
     outputs:
       shared_data: ${{ steps.generate_data.outputs.my_value }}
     steps:
       - name: Display Message
+        env:
+         APP: ${{ var.env.APP }}
         id: generate_data
         run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
 

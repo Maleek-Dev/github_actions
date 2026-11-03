@@ -1,22 +1,24 @@
-# yml file is a configuration file
-name: Staging deployment 
-on: 
+name: Staging deployment
+
+on:
   workflow_dispatch:
   push:
-    branches: main
+    branches:
+      - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
     outputs:
-      shared_data: "${{ steps.generate_data.outputs.my_value}}"
-  steps:
-   - name: Display Message 
-     id: generate_data
-     run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
+      shared_data: ${{ steps.generate_data.outputs.my_value }}
+    steps:
+      - name: Display Message
+        id: generate_data
+        run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
+
   build:
     needs: test
     runs-on: ubuntu-latest
-  steps:
-   - name: Display Message 
-     run: echo "output from test job: ${{ needs.test.outputs.shared_data }}"
-     
+    steps:
+      - name: Display Message
+        run: echo "output from step ${{ needs.test.outputs.shared_data }}"

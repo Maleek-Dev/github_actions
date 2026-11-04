@@ -1,9 +1,11 @@
 name: Test Service
+
 on: 
   workflow_dispatch:
   push:
-      branches: main
- 
+    branches:
+      - main
+
 jobs:
   build: 
     runs-on: ubuntu-latest
@@ -16,14 +18,14 @@ jobs:
         with: 
           node-version: 20
 
-      - name: Create node script 
+      - name: Create node script
         run: |
-          echo: "About to execute nodejs script"
+          echo "About to execute nodejs script"
           cat << 'EOF' > index.js
           console.log('Running my index.js')
           EOF
 
       - name: Run node script
         run: |
-         node index.js
-         echo "script is running"
+          node index.js
+          echo "script is running"

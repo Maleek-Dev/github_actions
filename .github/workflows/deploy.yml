@@ -33,5 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display Message
-        if: github.actor == 'maleek_dev'
-        run: echo "output from step ${{ needs.test.outputs.name }} ${{ needs.test.outputs.date_info }}"
+        if: (github.actor == 'maleek-dev' || github.actor == 'salman-dev') && github.ref == 'refs/heads/main'
+        run: |
+         echo "output is from step ${{ needs.test.outputs.name }} ${{ needs.test.outputs.date_info }}"
+         echo "run this and that"
+         echo "all is well that ends well"
+ 

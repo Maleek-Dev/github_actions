@@ -3,8 +3,7 @@ name: Staging deployment
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: main
 
 env:
   APP: v1
@@ -15,18 +14,24 @@ jobs:
       APP: v2
     runs-on: ubuntu-latest
     outputs:
-      shared_data: ${{ steps.generate_data.outputs.my_value }}
+      name: ${{ steps.generate_data.outputs.name }}
+      about_me: "This is a test job"
+      date_info: "${{ steps.get.outputs.date_info}}"
     steps:
       - name: Display Message
         id: generate_data
         env:
           APP: ${{ vars.APP_test }}
           MONGO_URL: ${{ secrets.MONGO_TEST_URL }}
-        run: echo "my_value=Hello_from_test" >> "$GITHUB_OUTPUT"
+        run: echo "name=Hello_from_test" >> "$GITHUB_OUTPUT"
+      - name: Get info
+        id: get
+        run: echo "date_info=$(date)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Display Message
-        run: echo "output from step ${{ needs.test.outputs.shared_data }}"
+        if: github.actor == 'maleek_dev'
+        run: echo "output from step ${{ needs.test.outputs.name }} ${{ needs.test.outputs.date_info }}"

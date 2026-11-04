@@ -19,7 +19,7 @@ jobs:
       - name: Create node script 
         run: |
           echo: "About to execute nodejs script"
-          cat << 'EOF' index.js
+          cat << 'EOF' > index.js
           console.log('Running my index.js')
           EOF
 
